@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+jobs:
+  fastcdr:
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        platform: [ubuntu-24.04] #, ubuntu-22.04-arm]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Build
+      run: |
+        make
