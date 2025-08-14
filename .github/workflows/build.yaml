@@ -25,7 +25,7 @@ jobs:
 
     - name: Build
       run: |
-        make
+        make PROJECT_BUILD_NUMBER=${GITHUB_RUN_NUMBER}
 
     - name: Deploy
       run: |
