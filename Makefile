@@ -32,12 +32,13 @@ stage:
 	$(GRADLE) -p $(project_srcdir) install --install_path=$(fastddsgen_INSTALL_PATH)
 
 control:
+	ARCH=$(dpkg --print-architecture)
 	@mkdir -p $(debian_dir)
 	@echo "Package: $(PROJECT_PACKAGE_NAME)" > $(control_file)
 	@echo "Version: $(fastddsgen_FULL_VERSION)" >> $(control_file)
 	@echo "Section: devel" >> $(control_file)
 	@echo "Priority: optional" >> $(control_file)
-	@echo "Architecture: amd64" >> $(control_file)
+	@echo "Architecture: $(ARCH)" >> $(control_file)
 	@echo "Depends: openjdk-17-jre" >> $(control_file)
 	@echo "Maintainer: $(PROJECT_MAINTAINER)" >> $(control_file)
 	@echo "Description: $(PROJECT_DESCRIPTION)" >> $(control_file)
